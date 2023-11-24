@@ -1,8 +1,8 @@
 class MyScene2 extends Phaser.Scene {
 
 	preload() {
-		this.load.image('back', '../assets/back.png');
-		this.load.image('alien2', '../assets/alien2.png');
+		this.load.image('back', 'assets/back.png');
+		this.load.image('alien2', 'assets/alien2.png');
 	}
 
 	constructor() {
