@@ -205,6 +205,7 @@ class MainScene extends Phaser.Scene {
 
         this.arrow_move(cursors, this.player1);//矢印キーによるplayer1の移動
         this.wasd_move(this.keys, this.player2);//WASDキーによるplayer2の移動
+        
         //ゲームクリアでなかった制限時間設定
         if(this.countdounTimer) this.countdown(delta);
 
