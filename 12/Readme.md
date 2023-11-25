@@ -1,5 +1,4 @@
-# phaser_tutorial
-JavaScript ゲームフレームワーク phaser のチュートリアル　
+# phaser のチュートリアル　
+JavaScriptフレームワーク phaser のチュートリアル　
 
-## シーンの遷移を実装したサンプル
-url 
+## 12. 複数のシーンを管理する

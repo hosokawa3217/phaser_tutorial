@@ -1,4 +1,4 @@
-# phaser_tutorial
+# phaser チュートリアル
 JavaScript ゲームフレームワーク phaser のチュートリアル　
 
 ## 13.　スプライトの回転のサンプル
