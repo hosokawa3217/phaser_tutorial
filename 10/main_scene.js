@@ -1,7 +1,6 @@
 // シーンクラス
 // 他のJSファイルから呼び出された場合はシーンを返す
 
-
 class MainScene extends Phaser.Scene {
 
     // コンストラクタ
@@ -24,12 +23,15 @@ class MainScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('coin', 'assets/coin.png');
+
     }
 
     // シーン初期化処理
     create() {
+        this.cameras.main.setBackgroundColor("#e6c000");
+        
          // 単体画像をシーンに追加(X座標,Y座標,画像名)
-        this.add.image(400, 300, 'sky');
+        // this.add.image(400, 300, 'sky');
         // 星を(200,200)に追加
         this.add.image(200, 200, 'star');
         // Player1の画像を物理演算を持った画像にする
