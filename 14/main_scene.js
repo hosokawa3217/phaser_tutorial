@@ -1,9 +1,5 @@
-// シーンクラス
-// 他のJSファイルから呼び出された場合はシーンを返す
+// 効果音のサンプル
 class MainScene extends Phaser.Scene {
-
-    
-    // time=Phaser.time; //時間クラス　
 
     // コンストラクタ
     constructor() {
@@ -13,66 +9,77 @@ class MainScene extends Phaser.Scene {
 
     // シーンの事前読み込み処理
     preload() {
-         // 画像の読み込み(使用する時の名前, パス)
         this.load.image('alien1', 'assets/alien1.png');
-        this.load.image('alien2', 'assets/alien2.png');
-        this.load.image('alien3', 'assets/alien3.png');
+        this.load.image('star', 'assets/star.png');
+        this.load.image('block', 'assets/block.png');//w:400,h:32
         this.load.image('platform', 'assets/platform.png');//w:400,h:32
+        // 効果音のロード
+        this.load.audio('GOAL', '14/getstar_se.mp3');
+        this.load.audio('JUMP', '14/jump_se.mp3');
+        
     }
 
     // シーン初期化処理
     create() {
-        // 単体画像をシーンに追加(X座標,Y座標,画像名)
-        // this.add.image(D_WIDTH/2,D_HEIGHT/2, 'platform');
+        //効果音の設定は　https://rexrainbow.github.io/phaser3-rex-notes/docs/site/audio/を参照のこと
+        this.goal_sound = this.sound.add('GOAL',{volume:0.1});
+        this.jump_sound = this.sound.add('JUMP',{volume:0.2});
+        
         const platform = this.physics.add.staticSprite(D_WIDTH/2,D_HEIGHT/2, 'platform');
-
         platform.setScale(2, 0.5);
         platform.refreshBody();
-    
-        const alien1 = this.physics.add.sprite(D_WIDTH/2, D_HEIGHT/4-30, 'alien1');
-        const alien2 = this.physics.add.sprite(D_WIDTH/2-40,D_HEIGHT/4+30, 'alien2');
-        const alien3 = this.physics.add.sprite(D_WIDTH/2+40, D_HEIGHT/4+30, 'alien3');
+        const block = this.physics.add.staticSprite(D_WIDTH/2,D_HEIGHT/2 -20, 'block');
 
-        let group = this.physics.add.group();
-        group.setXY(0, 100);
-        
-        group.add(alien1);
-        group.add(alien2);
-        group.add(alien3);
+        let group = this.physics.add.staticGroup();
+        group.add(platform);
+        group.add(block);
 
-        // group.setXY(200, 100);
-        // group.addMultiple([ alien1, alien2, alien3 ]);
-        group.angle(30);
-        group.setVelocityX(30);
-        
-        let group_children = group.getChildren();
-        group_children.forEach(element => {
-            element.setBounce(1.2);
-            element.setCollideWorldBounds(true);
-            element.setMaxVelocity(200,200);
-        });
+        const alien1 = this.physics.add.sprite(100, D_HEIGHT/2 -50, 'alien1');
+        this.alien1 = alien1;
+        this.physics.add.collider( alien1, group);
 
+        const star = this.physics.add.sprite(D_WIDTH-100, D_HEIGHT/2 -50, 'star');
+        this.physics.add.collider( star, group);
 
-        // NG group.setBounce(0.5);
-        // NG group.setCollideWorldBounds(true);
+         // 星に衝突したら
+         this.physics.add.overlap(alien1, star, collectStar, null, this);
+         function collectStar(p,star){  
+             star.disableBody(true, true);
+            //  効果音をならす
+            this.goal_sound.play();
 
-        // this.physics.world.enable(container);
-        // // setCollideWorldBounds:このボディがワールド境界と衝突するかどうかを設定
-        // container.body.setBounce(0.5).setCollideWorldBounds(true);
-        // container.body.setVelocityX(100);
-
-        this.physics.add.collider( group, platform);
-        // this.physics.add.collider(  [ alien1, alien2, alien3 ], ground);
-        // this.physics.add.image(350, 450, 'platform', null, { isStatic: true }).setScale(2, 0.5).setAngle(10);
-        // this.physics.add.collider(physicsContainer, platform);// 静止物の衝突処理を設定する
-        // const platform = this.physics.add.image(350, 450, 'platform', null, { isStatic: true })
-        // platform.setScale(2, 0.5).setAngle(10);
+         }
     }
 
      // 毎フレーム実行される繰り返し処理
-    update(time, delta) {
+    update() {
+        // エイリアンを矢印キーで移動させる
+        this.arrow_move(this.input.keyboard.createCursorKeys(), this.alien1);
 
-        // this.physics.world.collide(this.physicsContainer, [ this.platform ]);
+        //画面の右端にきたら移動停止
+        if(this.alien1.x > D_WIDTH-50) this.alien1.setVelocityX(0);
+
+    }
+
+     //矢印キーで移動 
+     arrow_move(cursors, object){
+    
+        if(cursors.up.isDown){
+            object.setVelocityY(-200);// 上方向の速度を設定
+             //  効果音をならす
+            this.jump_sound.play();
+            
+        }else if(cursors.left.isDown){
+            object.setVelocityX(-200);// 左方向の速度を設定
+    
+    
+        }else if(cursors.right.isDown){
+            object.setVelocityX(200);// 右方向の速度を設定
+    
+        }else{
+            // object.setVelocityX(0);
+            // object.setVelocityY(0);
+        }
     }
 
 }

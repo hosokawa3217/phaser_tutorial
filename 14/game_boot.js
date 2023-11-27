@@ -19,7 +19,7 @@ window.onload = function() {
             default: 'arcade', // 使用する物理エンジン
             arcade: {
                 gravity: {
-                    y: 30
+                    y: 250
                 }, // 重力
                 debug: true // デバックモード
             }

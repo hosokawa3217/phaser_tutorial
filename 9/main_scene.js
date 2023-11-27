@@ -90,8 +90,7 @@ class MainScene extends Phaser.Scene {
          // コインに衝突したら実行する（コインのボディを無効する）
         this.physics.add.overlap(player1, starGroup, collectStar, null, this);
         function collectStar(p,star){  
-               // 物理演算(ボディ)の無効化 (非アクティブ化, 非表示)
-            star.disableBody(true, true);
+            star.destroy(true, true);
         }
 
 
