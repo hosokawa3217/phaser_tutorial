@@ -10,22 +10,24 @@ class MainScene extends Phaser.Scene {
     // シーンの事前読み込み処理
     preload() {
         this.load.image('star', 'assets/star.png');
+        this.load.image('alien1', 'assets/alien1.png');
         
     }
 
     // シーン初期化処理
     create() {
-        const image1 = this.add.image(0, -20, 'star');
-        const image2 = this.add.image(20, 20, 'star');
-        const image3 = this.add.image(-20, 20, 'star');
+        const alien1 = this.add.image(0, 20, 'alien1');
+        const image1 = this.add.image(0, -30, 'star');
+        const image2 = this.add.image(30, 30, 'star');
+        const image3 = this.add.image(-50, 30, 'star');
         // コンテナに格納
-        this.container = this.add.container(200, 200, [ image1, image2, image3 ]);
+        this.container = this.add.container(200, 200, [ alien1, image1, image2, image3 ]);
         // コンテナを物理演算の対象とする
         this.physics.world.enable(this.container);
         // コンテナの大きさはデフォルトで０なので、コンテナの大きさを再定義する
         this.container.setSize(60, 60);
         // コンテナに速度ベクトルを与える。setBounceによる弾性を与える。setCollideWorldBoundsにより画面の境界で反射するようにする
-        this.container.body.setVelocity(100, -200).setBounce(1, 1).setCollideWorldBounds(true);
+        this.container.body.setVelocity(100, -200).setBounce(1, 0.99).setCollideWorldBounds(true);
         
     }
 

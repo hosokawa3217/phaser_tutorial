@@ -2,4 +2,8 @@
 JavaScript ゲームフレームワーク phaser のチュートリアル　
 
 ## シーンの遷移を実装したサンプル
-url https://github.com/hosokawa3217/phaser_tutorial/tree/main/12
+repository
+https://github.com/hosokawa3217/phaser_tutorial/tree/main/12
+
+Github Pages
+https://hosokawa3217.github.io/phaser_tutorial/index12.html

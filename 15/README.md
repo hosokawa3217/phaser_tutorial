@@ -1,9 +1,14 @@
 # phaser チュートリアル
 JavaScript ゲームフレームワーク phaser のチュートリアル　
 
-###15.コンテナ
-ゲームームオブジェクト
-[https://hosokawa3217.github.io/phaser_tutorial/index15.html](サンプル)
+###15.コンテナでゲームームオブジェクトをまとめる
+repository
+https://github.com/hosokawa3217/phaser_tutorial/tree/main/15
+
+Github Pages
+https://hosokawa3217.github.io/phaser_tutorial/index15.html
+
+
 
 container()は初期位置とオブジェクトを指定する
 ```javascript
