@@ -6,7 +6,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "url": "http://127.0.0.1:5500/index.html?debugger=true",
+            "url": "http://127.0.0.1:5500/index.html10?debugger=true",
             "webRoot": "${workspaceFolder}",
         }
     ]

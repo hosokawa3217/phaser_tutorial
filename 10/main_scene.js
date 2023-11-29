@@ -1,6 +1,7 @@
 // シーンクラス
 // 他のJSファイルから呼び出された場合はシーンを返す
 
+
 class MainScene extends Phaser.Scene {
 
     // コンストラクタ
@@ -23,15 +24,12 @@ class MainScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('coin', 'assets/coin.png');
-
     }
 
     // シーン初期化処理
     create() {
-        this.cameras.main.setBackgroundColor("#e6c000");
-        
          // 単体画像をシーンに追加(X座標,Y座標,画像名)
-        // this.add.image(400, 300, 'sky');
+        this.add.image(400, 300, 'sky');
         // 星を(200,200)に追加
         this.add.image(200, 200, 'star');
         // Player1の画像を物理演算を持った画像にする
@@ -67,54 +65,51 @@ class MainScene extends Phaser.Scene {
         staticGroup.create(200,D_HEIGHT-100,'block');
         staticGroup.create(300,D_HEIGHT-150,'block');
         staticGroup.create(400,D_HEIGHT-200,'block');
-    
+        this.physics.add.collider(player1, staticGroup);// 静止物の衝突処理を設定する
+
         let coinGroup = this.physics.add.group();// 動く物体をまとめる
-        coinGroup.create(200,D_HEIGHT-135, 'coin');// 星1
-        coinGroup.create(300,D_HEIGHT-185, 'coin');// 星2
-        coinGroup.create(400,D_HEIGHT-235, 'coin');// 星2
+        coinGroup.create(200,D_HEIGHT-135, 'coin');// コイン1
+        coinGroup.create(300,D_HEIGHT-185, 'coin');// コイン2
+        coinGroup.create(400,D_HEIGHT-235, 'coin');// コイン3
         
         // クラスメンバに変更
         this.starGroup = this.physics.add.group();// 動く物体をまとめる
         this.starGroup.create(550,D_HEIGHT-180, 'star');// 星1
         this.starGroup.create(600,D_HEIGHT-180, 'star');// 星2
         this.starGroup.create(650,D_HEIGHT-180, 'star');// 星3
-    
-        this.physics.add.collider(player1, staticGroup);// 静止物の衝突処理を設定する
         
-        // コインに衝突したら実行する
-        this.physics.add.overlap(player1, coinGroup, collectCoin, null, this);
-        function collectCoin(p,coin){
-            coin.destroy();// コインを消す
-        }
-    
-         // 星に衝突したら実行する
-        this.physics.add.overlap(player1, this.starGroup, this.collectStar, null, this);
+        // スコア
         this.score=0;
         //スコア表示
         this.scoreText =  this.add.text(20, 30, 'Score: ' + this.score, { fontSize: '28px', fill: '#FFF' }); 
         // ゲームクリアを判定するフラグ
         this.gameClear=false;
 
-
+        // コインに衝突したら実行する
+        this.physics.add.overlap(player1, coinGroup, collectCoin, null, this);
+        function collectCoin(p,coin){
+            coin.destroy();// コインを消す
+        }
+        // 星に衝突したら実行する
+        this.physics.add.overlap(player1, this.starGroup, this.collectStar, null, this);
     }
 
+    // 星を取った場合の処理
     collectStar(p,star){  
 
         // 星を消す
         star.destroy();
-
         // オブジェクトを再利用したい場合は、disableBodyでいったん画面から消す
         // star.disableBody(true, true);
 
-        // 物理演算(ボディ)の無効化 (非アクティブ化, 非表示)
-        //  Add and update the score
+        //  スコアの加算とscoreTextの更新
         this.score += 10;
         this.scoreText.setText('Score: ' + this.score);
         
-        console.log("star remain :"+this.starGroup.countActive(true));
         // starGroupに残っている星の数
         if ( this.starGroup.countActive(true) === 0)
         {
+            console.log("star remain :"+this.starGroup.countActive(true));
             this.gameClear=true;
         }
         
