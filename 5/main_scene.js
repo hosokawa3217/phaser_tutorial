@@ -49,13 +49,12 @@ class MainScene extends Phaser.Scene {
         // プレイヤーの移動
         // +X方向の移動フラグならプレイヤーを右に移動
         if (this.player_direction == 1) {
-            this.player.setVelocityX(100);
+            this.player.setVelocity(100, 0);
 
         // -X方向の移動フラグならプレイヤーを左に移動
         } else {
-            this.player.setVelocityX(-100);
+            this.player.setVelocity(-100, 0);
         }
-     
     }
 
 }
