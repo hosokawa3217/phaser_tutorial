@@ -5,5 +5,5 @@
 ゲーム制作開始のテンプレート
 
 # Github Pages
-https://hosokawa3217.github.io/phaser_tutorial/index16-1.html
+https://hosokawa3217.github.io/phaser_tutorial/index17-1.html
 
