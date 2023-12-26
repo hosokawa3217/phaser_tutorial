@@ -2,13 +2,17 @@ let config;
 let game;
 
 // ゲーム画面サイズ
-export const D_WIDTH = 800;
-export const D_HEIGHT = 600;
+const D_WIDTH = 800;
+const D_HEIGHT = 600;
+
+
+import GameScene from './scenes/GameScene.js'
+import HelloWorldScene from './scenes/HelloWorldScene.js'
 
 // ページ読み込み完了時に実行
 window.onload = function() {
 
-    this.time; //  the clock (Phaser.Time)
+    // this.time; //  the clock (Phaser.Time)
     // ゲームの設定値
     config = {
         type: Phaser.AUTO,
@@ -19,12 +23,12 @@ window.onload = function() {
             default: 'arcade', // 使用する物理エンジン
             arcade: {
                 gravity: {
-                    y: 200
+                    y: 300
                 }, // 重力
-                debug: true // デバックモード
+                debug: false // デバックモード
             }
         },
-        scene: MainScene // デフォルトシーン
+        scene: [GameScene, HelloWorldScene] // デフォルトシーン
     };
     // ゲーム開始
     game = new Phaser.Game(config);
