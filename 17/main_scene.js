@@ -1,10 +1,8 @@
-// import { D_HEIGHT, D_WIDTH } from "./game_boot.js";
 let platforms;
 let player;
 // 効果音のサンプル
 class MainScene extends Phaser.Scene {
 
-   
     // コンストラクタ
     constructor() {
         // 継承した「Phaser.Scene」クラスのコンストラクタの呼び出し
@@ -53,15 +51,15 @@ class MainScene extends Phaser.Scene {
             repeat: -1
         });
 
-    //  右キーを押すとスプライトシートの5-8がループするアニメが流れる
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
+        //  右キーを押すとスプライトシートの5-8がループするアニメが流れる
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
-    // X方向に1秒で0進むとスプライトシート4のtrunがループで流れる
+    // X方向に1秒で0進むとスプライトシート4のturnがループで流れる
     this.anims.create({
         key: 'turn',
         frames: [ { key: 'dude', frame: 4 } ],
@@ -76,11 +74,11 @@ class MainScene extends Phaser.Scene {
 
 //      //矢印キーで移動 
         if(cursors.left.isDown){// 左キーを押しているとき
-            player.setVelocityX(-200);// 左方向の速度を設定
+            player.setVelocityX(-160);// 左方向の速度を設定
             player.anims.play('left', true);
             console.log("left");
         }else if(cursors.right.isDown){
-            player.setVelocityX(200);// 右方向の速度を設定
+            player.setVelocityX(160);// 右方向の速度を設定
             player.anims.play('right', true);
 
         }else{
@@ -90,7 +88,7 @@ class MainScene extends Phaser.Scene {
         }
 
 // 上キーを押している状態で、playerのbodyの下方面が何かに触れているとき
-// Y方向に1秒で-330進みます。(=ジャンプ)
+// Y方向に1秒で-200進みます。(=ジャンプ)
         if (cursors.up.isDown && player.body.touching.down)
         {
             player.setVelocityY(-200);
