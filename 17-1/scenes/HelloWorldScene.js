@@ -1,3 +1,4 @@
+import { D_WIDTH, D_HEIGHT} from '../game_boot.js';
 export default class HelloWorldScene extends Phaser.Scene
 {
 	constructor()
@@ -12,7 +13,7 @@ export default class HelloWorldScene extends Phaser.Scene
     create()
     {
         this.cameras.main.setBackgroundColor("#333388");
-        this.add.text(200, 200, 'Hello World', { fontSize: '28px', fill: '#FFF' ,fontFamily: "Arial"}); 
+        this.add.text(D_WIDTH/2, D_HEIGHT/2, 'Hello World', { fontSize: '28px', fill: '#FFF' ,fontFamily: "Arial"}); 
 
     }
 }

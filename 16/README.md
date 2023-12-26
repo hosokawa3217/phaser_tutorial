@@ -1,9 +1,10 @@
 # phaser チュートリアル
 JavaScript ゲームフレームワーク phaser のチュートリアル　
 
-## アニメーションの追加
+##　概要
+スプライトアニメーションを実装するコード例
 
-Github Pages
+## Github Pages
 https://hosokawa3217.github.io/phaser_tutorial/index17.html
 
 ```js

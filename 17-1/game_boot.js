@@ -4,6 +4,7 @@ let game;
 // ゲーム画面サイズ
 const D_WIDTH = 800;
 const D_HEIGHT = 600;
+export { D_WIDTH, D_HEIGHT};
 
 import HelloWorldScene from './scenes/HelloWorldScene.js'
 
