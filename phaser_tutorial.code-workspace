@@ -1,11 +1,8 @@
 {
 	"folders": [
 		{
-			"path": ".."
+			"path": "."
 		},
-		{
-			"path": "../../../デスクトップ/05"
-		}
 	],
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "phaser_tutorial"
